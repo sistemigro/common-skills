@@ -13,14 +13,21 @@ From the project root:
 ```bash
 npx skills add sistemigro/common-skills --skill setup
 bash .claude/skills/setup/scripts/install-skills.sh
+bash .claude/skills/setup/scripts/install-playwright.sh
 ```
 
-The first line installs the `setup` skill; the second runs it and pulls in every
-source listed in `skills.txt` — see [What gets installed](#what-gets-installed).
-That list includes this repository, so the same command also refreshes `setup`
-itself. Re-run the second line any time.
+The first line installs the `setup` skill. The second pulls in every source
+listed in `skills.txt` — see [What gets installed](#what-gets-installed) — and
+that list includes this repository, so it also refreshes `setup` itself. The
+third makes the [Playwright Agent CLI](https://playwright.dev/agent-cli/installation)
+available for browser automation and testing (needs Node 20+). Re-run the last
+two any time.
 
-Then start a new session so the agent loads them.
+Then start a new session so the agent loads the new skills.
+
+This repository is **private**, so the machine needs access to the `sistemigro`
+org first — an authenticated `gh` (`gh auth login`), a git credential helper, or
+a working SSH key. The CLI tries all three.
 
 ## Using the setup skill
 
@@ -69,7 +76,7 @@ Re-run `/setup` wherever you want the change.
 
 | Source | Skills | Why it is here |
 | --- | --- | --- |
-| [`sistemigro/common-skills`](https://github.com/sistemigro/common-skills) | all | Our own skills: the git workflow (`commit-changes`, `create-new-branch`, `create-pull-request`), the `design-anti-patterns` house list, and `setup` itself, so every run also refreshes this list and the installer. |
+| [`sistemigro/common-skills`](https://github.com/sistemigro/common-skills) | all | Our own skills: the git workflow (`commit-changes`, `create-new-branch`, `create-pull-request`), the house rules (`design-anti-patterns`, `nextjs-ssr`), and `setup` itself, so every run also refreshes this list and the installer. |
 | [`anthropics/skills`](https://github.com/anthropics/skills) | `frontend-design`, `docx`, `pptx`, `xlsx`, `pdf`, `skill-creator`, `webapp-testing`, `web-artifacts-builder` | `frontend-design` is the primary design skill: brief-first, no hardcoded aesthetic, and the one other repos fork. Plus document formats and skill authoring. |
 | [`Leonxlnx/taste-skill`](https://github.com/Leonxlnx/taste-skill) | `design-taste-frontend`, `image-to-code` | Landing-page and portfolio specialist, explicitly contextual rather than a fixed style. `image-to-code` turns a reference image into markup. |
 | [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `ui-ux-pro-max`, `design-system` | Lookup library: 192 palettes, 74 font pairings, 119 UX guidelines, 22 stacks. Reference data, not a competing opinion. |

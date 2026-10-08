@@ -12,7 +12,7 @@
 # every session, and skills with overlapping triggers compete non-deterministically
 # for the same job, so each cluster keeps one winner.
 
-sistemigro/common-skills | Our own skills: the git workflow (`commit-changes`, `create-new-branch`, `create-pull-request`), the `design-anti-patterns` house list, and `setup` itself, so every run also refreshes this list and the installer.
+sistemigro/common-skills | Our own skills: the git workflow (`commit-changes`, `create-new-branch`, `create-pull-request`), the house rules (`design-anti-patterns`, `nextjs-ssr`), and `setup` itself, so every run also refreshes this list and the installer.
 
 # --- design: build, look up, review -------------------------------------------
 anthropics/skills  frontend-design  docx  pptx  xlsx  pdf  skill-creator  webapp-testing  web-artifacts-builder | `frontend-design` is the primary design skill: brief-first, no hardcoded aesthetic, and the one other repos fork. Plus document formats and skill authoring.
