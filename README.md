@@ -12,8 +12,8 @@ From the project root:
 
 ```bash
 npx skills add sistemigro/common-skills --skill setup
-bash .claude/skills/setup/scripts/install-skills.sh
-bash .claude/skills/setup/scripts/install-playwright.sh
+bash .agents/skills/setup/scripts/install-skills.sh
+bash .agents/skills/setup/scripts/install-playwright.sh
 ```
 
 The first line installs the `setup` skill. The second pulls in every source
