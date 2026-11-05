@@ -1,8 +1,5 @@
 # Sistemigro Common Skills
 
-[![GitHub Release](https://img.shields.io/github/v/release/sistemigro/common-skills)](https://github.com/sistemigro/common-skills)
-
-
 ## 💿 Installation guide
 
 Run these steps from the **root of the application project** you want to set
