@@ -15,6 +15,7 @@ const readmePath = join(root, "README.md");
 
 const START = "<!-- skills-table:start -->";
 const END = "<!-- skills-table:end -->";
+const TOPICS = new Set(["design", "code-quality", "security", "marketing", "planning"]);
 
 const rows = [];
 const problems = [];
@@ -23,13 +24,18 @@ readFileSync(listPath, "utf8").split("\n").forEach((raw, i) => {
   const line = raw.replace(/\r$/, "").trim();
   if (!line || line.startsWith("#")) return;
 
-  const bar = line.indexOf("|");
-  const entry = (bar === -1 ? line : line.slice(0, bar)).trim();
-  const why = bar === -1 ? "" : line.slice(bar + 1).trim();
+  const [rawEntry = "", rawWhy = "", rawTopics = ""] = line.split("|");
+  const entry = rawEntry.trim();
+  const why = rawWhy.trim();
+  const topics = rawTopics.split(",").map((topic) => topic.trim()).filter(Boolean);
   if (!entry) return;
 
   const [source, ...skills] = entry.split(/\s+/);
   if (!why) problems.push(`skills.txt:${i + 1}: "${source}" has no "| why it is here"`);
+  if (topics.length === 0) problems.push(`skills.txt:${i + 1}: "${source}" has no topics`);
+  for (const topic of topics) {
+    if (!TOPICS.has(topic)) problems.push(`skills.txt:${i + 1}: "${source}" has unknown topic "${topic}"`);
+  }
 
   const href = /^[\w.-]+\/[\w.-]+$/.test(source)
     ? `https://github.com/${source}`
@@ -40,6 +46,7 @@ readFileSync(listPath, "utf8").split("\n").forEach((raw, i) => {
   rows.push({
     source: href ? `[\`${source}\`](${href})` : `\`${source}\``,
     skills: skills.length ? skills.map((s) => `\`${s}\``).join(", ") : "all",
+    topics: topics.join(", "),
     why: why.replace(/\|/g, "\\|"),
   });
 });
@@ -50,9 +57,9 @@ if (problems.length) {
 }
 
 const table = [
-  "| Source | Skills | Why it is here |",
-  "| --- | --- | --- |",
-  ...rows.map((r) => `| ${r.source} | ${r.skills} | ${r.why} |`),
+  "| Source | Skills | Topics | Why it is here |",
+  "| --- | --- | --- | --- |",
+  ...rows.map((r) => `| ${r.source} | ${r.skills} | ${r.topics} | ${r.why} |`),
 ].join("\n");
 
 const readme = readFileSync(readmePath, "utf8");

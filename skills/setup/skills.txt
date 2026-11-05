@@ -1,8 +1,9 @@
-# One entry per line:  <source> [skill ...] | <why it is here>
+# One entry per line:  <source> [skill ...] | <why it is here> | <topics>
 #
 #   <source>   github shorthand (owner/repo), a full git/https URL, or a local path
 #   [skill]    optional, space separated. Omit to install every skill in the source.
 #   | <why>    required. Reasons are published as a table in README.md.
+#   | <topics> required: design, code-quality, security, marketing, planning.
 #
 # Blank lines and lines starting with # are ignored.
 # Everything installs into the current project's .claude/skills/.
@@ -12,16 +13,18 @@
 # every session, and skills with overlapping triggers compete non-deterministically
 # for the same job, so each cluster keeps one winner.
 
-sistemigro/common-skills | Our own skills: the git workflow (`commit-changes`, `create-new-branch`, `create-pull-request`), the house rules (`design-anti-patterns`, `nextjs-ssr`), and `setup` itself, so every run also refreshes this list and the installer.
+sistemigro/common-skills | Our reusable agent workflow and inherited role agents, git workflow, house rules, and `setup` itself. | design, code-quality, planning
 
 # --- design: build, look up, review -------------------------------------------
-anthropics/skills  frontend-design  docx  pptx  xlsx  pdf  skill-creator  webapp-testing  web-artifacts-builder | `frontend-design` is the primary design skill: brief-first, no hardcoded aesthetic, and the one other repos fork. Plus document formats and skill authoring.
-Leonxlnx/taste-skill  design-taste-frontend  image-to-code | Landing-page and portfolio specialist, explicitly contextual rather than a fixed style. `image-to-code` turns a reference image into markup.
-nextlevelbuilder/ui-ux-pro-max-skill  ui-ux-pro-max  design-system | Lookup library: 192 palettes, 74 font pairings, 119 UX guidelines, 22 stacks. Reference data, not a competing opinion.
-bencium/bencium-claude-code-design-skill  design-audit  ui-typography  eu-ai-act-reviewer | Review passes: design critique, typography checks, and EU AI Act compliance for EU clients.
-vercel-labs/agent-skills  web-design-guidelines  deploy-to-vercel  vercel-react-best-practices  writing-guidelines | Review UI against the live Web Interface Guidelines, deploy, and React/writing practice.
+anthropics/skills  frontend-design  docx  pptx  xlsx  pdf  skill-creator  webapp-testing  web-artifacts-builder | `frontend-design` is the primary design skill: brief-first, no hardcoded aesthetic, and the one other repos fork. Plus document formats and skill authoring. | design, code-quality
+nextlevelbuilder/ui-ux-pro-max-skill  ui-ux-pro-max  design-system | Lookup library: 192 palettes, 74 font pairings, 119 UX guidelines, 22 stacks. Reference data, not a competing opinion. | design
+bencium/bencium-claude-code-design-skill  design-audit  ui-typography  eu-ai-act-reviewer | Review passes: design critique, typography checks, and EU AI Act compliance for EU clients. | design, security
+vercel-labs/agent-skills  web-design-guidelines  deploy-to-vercel  vercel-react-best-practices  writing-guidelines | Review UI against the live Web Interface Guidelines, deploy, and React/writing practice. | design, code-quality
 
 # --- pre-launch checks --------------------------------------------------------
-accesslint/claude-marketplace | Accessibility: scan, audit, inspect, diff and fix a11y issues before client sites ship.
-cloudflare/security-audit-skill | Security audit of code before client work goes live.
-SNLabat/SEO-GEO-AEO-Skill | SEO, GEO and AEO audits of client sites: search rankings, schema markup, and visibility in AI answer engines.
+accesslint/claude-marketplace | Accessibility: scan, audit, inspect, diff and fix a11y issues before client sites ship. | code-quality
+cloudflare/security-audit-skill | Security audit of code before client work goes live. | security, code-quality
+SNLabat/SEO-GEO-AEO-Skill | SEO, GEO and AEO audits of client sites: search rankings, schema markup, and visibility in AI answer engines. | marketing
+every-app/open-seo  keyword-research | Live keyword opportunities, localized Google SERPs, ranking positions and search-demand metrics through OpenSEO MCP. | marketing
+DietrichGebert/ponytail  ponytail | Use in the implementer for minimal, complete implementations that reuse existing code and preserve safety checks. | code-quality
+mattpocock/skills  grill-me  grilling | `grill-me` interviews the user and calls `grilling` for the shared interview method. | planning

@@ -3,7 +3,8 @@
 #   https://playwright.dev/agent-cli/installation
 #
 # Creates .playwright/ (and adds it to .gitignore), downloads any missing
-# browsers, and writes the CLI's own workflow docs to .claude/skills/playwright-cli.
+# browsers, and writes the CLI's own workflow docs to both .agents/skills and
+# .claude/skills. Codex and Cursor discover the shared .agents copy.
 #
 # Usage: install-playwright.sh    — run from the project root.
 set -uo pipefail
@@ -32,11 +33,16 @@ else
   fi
 fi
 
-# Writes .playwright/, the .gitignore entry, the project skill docs, and pulls
-# any missing browsers.
+# Writes .playwright/, the .gitignore entry and both native skill locations,
+# and pulls any missing browsers.
 echo "→ initialising workspace in $PWD"
-if "${run[@]}" install --skills=claude </dev/null; then
-  echo "✓ Playwright Agent CLI ready"
+if "${run[@]}" install --skills=agents </dev/null; then
+  if "${run[@]}" install --skills=claude </dev/null; then
+    echo "✓ Playwright Agent CLI ready for Claude Code, Codex, and Cursor"
+  else
+    echo "✗ playwright-cli could not install its Claude Code skill" >&2
+    exit 1
+  fi
 else
   echo "✗ playwright-cli install failed" >&2
   exit 1
